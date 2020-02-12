@@ -20,19 +20,19 @@ import (
 type MainEchoServerParams struct {
 	fx.In
 
-	Middleware struct{
+	Middleware struct {
 		fx.In
 
 		JaegerTracingMiddleware echo.MiddlewareFunc `name:"jaegertracing"`
 
-		// Add your middleware here:
+		// TODO: Add your middleware here:
 		// MyAwesomeMiddleware echo.MiddlewareFunc `name:"my_awesome_middleware"`
 	}
 
-	Controllers struct{
+	Controllers struct {
 		fx.In
 
-		// Add your controllers here:
+		// TODO: Add your controllers here:
 		// MyAwesomeController controllers.MyAwesomeController
 	}
 }
@@ -70,6 +70,8 @@ func EchoServerProvider(
 
 	// Routes
 	{
+		// TODO: add your router here
+
 		server.GET("/version", controller.NewVersionController().Version)
 
 		// TODO: consider adding "enable swagger docs" switch

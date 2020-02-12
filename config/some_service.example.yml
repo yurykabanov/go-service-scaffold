@@ -1,8 +1,16 @@
+# Logger configuration
 log:
+  # Available levels: trace, debug, info, warn, error, fatal, panic
   level: info
+
+  # Available formats: json, text
   format: text
 
+# HTTP Server configuration
 http:
+  # Bind address
   addr: 0.0.0.0:8000
+
+  # Server timeouts
   read_timeout: 30s
   write_timeout: 30s

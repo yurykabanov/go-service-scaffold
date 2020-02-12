@@ -6,8 +6,6 @@ TODO: Some service description
 
 ## Quickstart
 
-### Using config file
-
 1. Prepare config file using [example](./config/some_service.example.yml) 
 
 2. (optional) Prepare Jaeger-related [environment variables](https://github.com/jaegertracing/jaeger-client-go)
