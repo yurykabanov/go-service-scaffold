@@ -1,0 +1,33 @@
+# vim: ts=2:sts=2:sw=2:expandtab:smarttab:
+
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: test
+    image: golang:1.13
+    commands:
+      - go test ./...
+
+  - name: build
+    image: golang:1.13
+    commands:
+      - sh scripts/build.sh
+
+  publish:
+    image: plugins/docker
+    settings:
+      repo: registry.my-company.com/project/service-scaffold
+      registry: registry.my-company.com
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      tag:
+        - latest
+        - ${DRONE_TAG}
+
+    when:
+      event: tag

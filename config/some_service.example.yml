@@ -1,0 +1,8 @@
+log:
+  level: info
+  format: text
+
+http:
+  addr: 0.0.0.0:8000
+  read_timeout: 30s
+  write_timeout: 30s
