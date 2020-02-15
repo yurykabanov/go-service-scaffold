@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"github.com/labstack/echo-contrib/jaegertracing"
 	"github.com/labstack/echo/v4"
 	"github.com/yurykabanov/service-scaffold/pkg/version"
 )
@@ -28,9 +27,6 @@ type versionResponse struct {
 // @Produce json
 // @Success 200 {object} versionResponse
 func (ctrl *VersionController) Version(ctx echo.Context) error {
-	sp := jaegertracing.CreateChildSpan(ctx, "Child span for additional processing")
-	defer sp.Finish()
-
 	return ctx.JSON(200, versionResponse{
 		Build:     version.Build,
 		Version:   version.Version,
