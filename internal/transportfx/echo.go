@@ -32,6 +32,8 @@ type MainEchoServerParams struct {
 	Controllers struct {
 		fx.In
 
+		VersionController *controller.VersionController
+
 		// TODO: Add your controllers here:
 		// MyAwesomeController controllers.MyAwesomeController
 	}
@@ -72,11 +74,11 @@ func EchoServerProvider(
 
 	// Routes
 	{
-		// TODO: add your router here
+		// TODO: add your routes here
 		api := server.Group("/api/:version")
 		_ = api
 
-		server.GET("/version", controller.NewVersionController().Version)
+		server.GET("/version", params.Controllers.VersionController.Version)
 
 		// TODO: consider adding "enable swagger docs" switch
 		docs.SwaggerInfo.Version = version.Version
