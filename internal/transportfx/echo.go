@@ -60,6 +60,8 @@ func EchoServerProvider(
 	// NOTE: Echo.StdLogger is a logger that set into `http.Server`'s `ErrorLog`
 	server.StdLogger = stdLogger
 
+	server.HTTPErrorHandler = controller.EchoErrorHandler
+
 	// Middleware
 	{
 		server.Use(middleware.Recover())
@@ -71,6 +73,8 @@ func EchoServerProvider(
 	// Routes
 	{
 		// TODO: add your router here
+		api := server.Group("/api/:version")
+		_ = api
 
 		server.GET("/version", controller.NewVersionController().Version)
 
