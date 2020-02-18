@@ -7,6 +7,7 @@ import (
 	"github.com/yurykabanov/service-scaffold/internal/loggerfx"
 	"github.com/yurykabanov/service-scaffold/internal/tracingfx"
 	"github.com/yurykabanov/service-scaffold/internal/transportfx"
+	"github.com/yurykabanov/service-scaffold/internal/validatorfx"
 	"go.uber.org/fx"
 )
 
@@ -20,6 +21,7 @@ func main() {
 		configfx.Module,
 		loggerfx.Module,
 		tracingfx.Module,
+		validatorfx.Module,
 		transportfx.Module,
 	)
 

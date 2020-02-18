@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 )
 
@@ -32,6 +33,15 @@ func EchoErrorHandler(err error, ctx echo.Context) {
 	switch err.(type) {
 	case *ErrorResponse:
 		errorResponse = err.(*ErrorResponse)
+
+	case validator.ValidationErrors:
+		validationError := err.(validator.ValidationErrors)
+
+		errorResponse = &ErrorResponse{
+			HttpCode: 400,
+			Code:     "request_validation_error",
+			Message:  fmt.Sprintf("Bad request: %s", validationError.Error()),
+		}
 
 	case *echo.HTTPError:
 		httpError := err.(*echo.HTTPError)

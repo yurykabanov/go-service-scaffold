@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/sirupsen/logrus"
@@ -19,6 +20,8 @@ import (
 
 type MainEchoServerParams struct {
 	fx.In
+
+	Validator *validator.Validate
 
 	Middleware struct {
 		fx.In
@@ -62,7 +65,11 @@ func EchoServerProvider(
 	// NOTE: Echo.StdLogger is a logger that set into `http.Server`'s `ErrorLog`
 	server.StdLogger = stdLogger
 
+	// Custom HTTP Error handler
 	server.HTTPErrorHandler = controller.EchoErrorHandler
+
+	// Validator
+	server.Validator = &echoValidatorWrapper{validator: params.Validator}
 
 	// Middleware
 	{
