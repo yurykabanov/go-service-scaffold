@@ -10,5 +10,5 @@ var Module = fx.Options(
 	jaegertracingfx.JaegerTracerOption,
 	fx.Provide(EchoTraceConfigProvider),
 	fx.Provide(fx.Annotated{Name: "jaegertracing", Target: JaegerTracingMiddleware}),
-	// jaegertracingfx.RegisterTracerAsGlobalOption,
+	jaegertracingfx.RegisterTracerAsGlobalOption,
 )
